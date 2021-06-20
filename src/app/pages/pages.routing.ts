@@ -14,7 +14,6 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'grafica', component: GraficaComponent },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
   }
 ];
