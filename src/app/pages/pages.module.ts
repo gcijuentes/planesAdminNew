@@ -6,6 +6,8 @@ import { GraficaComponent } from './grafica/grafica.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { UsuariosComponent } from './admin/usuarios/usuarios.component';
+import { PlanesComponent } from './admin/planes/planes.component';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { RouterModule } from '@angular/router';
      ProgressComponent,
      GraficaComponent,
      PagesComponent,
+     UsuariosComponent,
+     PlanesComponent,
    ],
    exports:[DashboardComponent,
      ProgressComponent,
