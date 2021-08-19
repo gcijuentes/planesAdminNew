@@ -8,6 +8,11 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 import { PlanesComponent } from './admin/planes/planes.component';
+import { EditarComponent } from './admin/planes/editar/editar.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { HomeComponent } from './home/home.component';
+import { ComponentsModule } from '../components/components.module';
+import { DetalleComponent } from './detalle/detalle.component';
 
 
 @NgModule({
@@ -18,6 +23,10 @@ import { PlanesComponent } from './admin/planes/planes.component';
      PagesComponent,
      UsuariosComponent,
      PlanesComponent,
+     EditarComponent,
+     PromesasComponent,
+     HomeComponent,
+     DetalleComponent
    ],
    exports:[DashboardComponent,
      ProgressComponent,
@@ -26,7 +35,8 @@ import { PlanesComponent } from './admin/planes/planes.component';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }

@@ -1,0 +1,4 @@
+article:hover{
+  background: var(--selected-blue);
+  border: 2px solid var(--accent-lightblue);
+}

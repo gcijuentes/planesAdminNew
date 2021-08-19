@@ -4,14 +4,17 @@ import { PagesRoutingModule } from './pages/pages.routing';
 import { AuthRoutingModule } from './auth/auth.routing';
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { HomeComponent } from './pages/home/home.component';
+import { DetalleComponent } from './pages/detalle/detalle.component';
 
 
 
 const routes: Routes = [
   //path: '/dashboard' PagesRoutingModule
   //path: '/auth' AuthRoutingModule
-
-  { path: '', redirectTo:'/dashboard',pathMatch:'full'},
+  { path: '', component: HomeComponent},
+  { path: 'detalle', component: DetalleComponent},
+  //{ path: '/dashboard', redirectTo:'/dashboard',pathMatch:'full'},
   { path: '**', component: NopagefoundComponent },
 ];
 

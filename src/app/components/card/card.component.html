@@ -1,0 +1,36 @@
+
+<div class="l-col-12 l-col-md-8" *ngIf="planesCard.length >0" >
+  <article class="h-card mb-4" *ngFor="let planCard of planesCard" >
+    <div class="h-card__image p-1">
+      <img *ngIf="planCard.archivo" [src]= "planCard.isapre.archivo.url" alt="Card image">
+      <img *ngIf="!planCard.archivo" [src]= "default_image" alt="Card image">
+    </div>
+    <div class="h-card__content p-1">
+      <h3 class="h-card__title fw-bold">{{planCard.nombre}}</h3>
+      <p class="text-emphasis-medium paragraph-3" >
+        <ng-container  *ngFor="let cobertura of planCard.coberturas">
+          {{cobertura.detalle}}<br>
+        </ng-container>
+        </p>
+    </div>
+
+    <div class="flex flex-column flex-between p-1 h-100 text-center">
+      <p class="fz-h3 fw-bold">${{planCard.valor_base_uf}} <span class="fz-small fw-regular">/ mes</span></p>
+
+      <button
+      *ngIf="planCard.archivo"
+      class="button button-success" data-toggle="modal" data-target="#modalPdf" [attr.data-target]="'#modalPdf' + planCard.id">
+        Ver detalle
+      </button>
+      <app-modalpdf *ngIf="planCard.archivo" [planCard]="planCard" ></app-modalpdf>
+
+      <!-- <a routerLink="#" class="button button-success " >
+
+        <div class="flex flex-center flex-items-center">
+          Detalles
+          <svg class="button__icon ml-1"><use /></svg>
+        </div>
+      </a> -->
+    </div>
+  </article>
+</div>

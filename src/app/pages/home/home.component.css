@@ -1,15 +1,3 @@
-
-
-
-.fast{
-    -webkit-animation-duration: 0.3s;
-    animation-duration: 0.3s;
-    -webkit-animation-fill-mode:both;
-    animation-fill-mode:both
-}
-
-
-
 :root {
   --header-height: 4rem;
   --grid-gap: 1rem;
@@ -78,7 +66,13 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0; }
+  margin: 0;
+  background: var(--background);
+  font-family: var(--font-family);
+  color: var(--text-emphasis-high);
+  font-size: var(--fz-body);
+
+}
 
 h1 {
   font-size: var(--fz-h1); }
@@ -1247,3 +1241,9 @@ h3 {
   border-radius: 0.5rem; }
   .badge-success {
     background: var(--accent-green); }
+
+
+
+.cs-mb-4{
+       margin-bottom: 1.5rem!important;
+}

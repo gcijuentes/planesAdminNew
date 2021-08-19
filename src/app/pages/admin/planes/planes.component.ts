@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanesService } from 'src/app/services/planes.service';
+import { PlanCard, PlanesCardResponse } from '../../../interfaces/planes-card.interface';
 
 @Component({
   selector: 'app-planes',
@@ -8,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanesComponent implements OnInit {
 
-  constructor() { }
+
+  public planesCard:PlanCard[]=[];
+  //public planesCardResponse:PlanesCardResponse;
+
+  constructor(private planesService:PlanesService) { }
 
   ngOnInit(): void {
+    this.planesService.getPlanesCard();
+    this.planesService.planesCard$.subscribe(resp=>{
+      console.log(resp);
+      this.planesCard = resp;
+  });
+
   }
 
 }

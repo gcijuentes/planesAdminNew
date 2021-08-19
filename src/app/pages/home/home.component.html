@@ -1,0 +1,40 @@
+
+<app-navbar></app-navbar>
+    <main>
+      <div class="container mt-8">
+        <div class="l-grid flex-items-center">
+          <div class="l-col-12 l-col-sm-8 l-col-md-8">
+           <!-- <h2 class="my-2 fw-bold"> <span class="badge badge-success" *ngIf="planesCardResponse"  >{{planesCardResponse.meta.total}}</span> Resultados</h2> -->
+          </div>
+          <div class="l-col-12 l-col-sm-4 l-col-md-4">
+            <h2 class="my-2 fw-bold"> Listado Planes : </h2>
+            <!--<form action="" class="form">
+              <div class="flex flex-items-center">
+                <svg class="icon icon-success icon-large mr-1"><use href="assets/icons/icons.svg#money"/></svg>
+                <select name="" class="form__input form__input--select m-0">
+                  <option value="">USD</option>
+                  <option value="">EUR</option>
+                  <option value="">MXN</option>
+                </select>
+              </div>
+            </form>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="divider mb-4"></div>
+      </div>
+
+      <div class="container">
+        <div class="l-grid l-grid-double-gap-md">
+
+          <app-filter class="l-col-12 l-col-md-4"></app-filter>
+          <app-card class="l-col-12 l-col-md-8"></app-card>
+
+
+        </div>
+      </div>
+    </main>
+
+    <script src="js/main.js"></script>

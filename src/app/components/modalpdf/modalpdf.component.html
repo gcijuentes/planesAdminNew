@@ -1,0 +1,23 @@
+<!-- Button trigger modal
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalPdf">
+  Launch demo modal
+</button> -->
+
+
+
+
+
+<div [id]="'modalPdf'+ planCard.id" tabindex="-1" aria-labelledby="exampleModalCenterTitle" class="modal fade show"
+ aria-modal="true" role="dialog">
+  <div role="document" class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="pdfLabel" class="modal-title"> {{planCard.archivo.url}} Cruz Blanca : {{planCard.nombre}} [Cerrado]</h5><button type="button"
+          data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+      </div>
+
+      <div id="pdfData" class="modal-body"><object id="pdfObject" type="application/pdf"
+          [data]="planCard.archivo.url | safe:'resourceUrl'" width="100%" height="600px"></object></div>
+    </div>
+  </div>
+</div>
