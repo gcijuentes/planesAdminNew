@@ -29,9 +29,11 @@
       <div class="container">
         <div class="l-grid l-grid-double-gap-md">
 
-          <app-filter class="l-col-12 l-col-md-4"></app-filter>
-          <app-card class="l-col-12 l-col-md-8"></app-card>
+          <!-- <app-filter class="l-col-12 l-col-md-4"></app-filter> -->
 
+          <app-all-filter class="l-col-12 l-col-md-4"></app-all-filter>
+
+          <app-card  [itemsPerPage]="itemsPerPage" [currentPage]="currentPage" [totalItems]="totalItems" [planesCard]="planesCard" class="l-col-12 l-col-md-8"></app-card>
 
         </div>
       </div>

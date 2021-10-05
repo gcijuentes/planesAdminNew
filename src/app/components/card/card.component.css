@@ -1,4 +1,24 @@
 article:hover{
   background: var(--selected-blue);
-  border: 2px solid var(--accent-lightblue);
+  border: 1px solid var(--accent-lightblue);
+}
+
+
+article{
+  border: 1px solid var(--selected-blue);
+}
+
+
+
+.mb-4-c, .my-4-c{
+  margin-bottom: 1.1rem!important;
+}
+
+.custom-article .h-card {
+  margin-bottom: 1.1rem!important;
+}
+
+.h-card {
+  padding: 0.6rem;
+
 }

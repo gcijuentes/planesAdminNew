@@ -18,6 +18,10 @@ export interface PlanCard {
   coberturas:    Cobertura[];
   archivo:      Archivo;
   isapre:        Isapre;
+  valorPesos:    number;
+  ges:    number;
+
+
 }
 
 export interface Isapre {

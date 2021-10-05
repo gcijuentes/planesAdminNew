@@ -9,6 +9,12 @@ import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { ComponentsModule } from './components/components.module';
 import { PipesModule } from './pipes/pipes.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
+import { JwPaginationModule } from 'jw-angular-pagination';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +26,12 @@ import { PipesModule } from './pipes/pipes.module';
     PagesModule,
     AuthModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    NgxPaginationModule,
+    HttpClientModule,
+    JwPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })

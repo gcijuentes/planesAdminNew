@@ -19,6 +19,10 @@
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
+    "feather-icons": "^4.28.0",
+    "jw-angular-pagination": "^1.2.0",
+    "jw-paginate": "^1.0.4",
+    "ngx-pagination": "^5.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlanesService } from '../../services/planes.service';
 import { environment } from 'src/environments/environment';
 import { PlanCard } from 'src/app/interfaces/planes-card.interface';
@@ -10,16 +10,35 @@ import { PlanCard } from 'src/app/interfaces/planes-card.interface';
 })
 export class CardComponent implements OnInit {
 
-  public planesCard:PlanCard[]=[];
+  @Input() planesCard:PlanCard[]=[];
+
+  @Input() public totalItems: number;
+  @Input() public itemsPerPage: number;
+  @Input() public currentPage: number;
+
+
+  config: any;
+
   public default_image:string=environment.default_img;
 
-  constructor(private planesService:PlanesService) { }
+  constructor(private planesService:PlanesService) {
+  }
 
   ngOnInit(): void {
-    this.planesService.getPlanesCard();
-    this.planesService.planesCard$.subscribe(resp=>{
-      console.log(resp);
-      this.planesCard = resp;
-    });
+    console.log('CardComponent');
+    console.log(this.planesCard);
+
+  }
+
+  pageChanged(event){
+    console.log('getPage -> ');
+    this.config.currentPage = event;
+  }
+
+  getPage(page) {
+    console.log('getPage -> '+page);
+    console.log(page);
+    this.planesService.getPlanesCardByPage(page);
+
   }
 }

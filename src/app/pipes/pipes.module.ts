@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SafePipe } from './safe.pipe';
+import { TipoPlanPipe } from './tipo-plan.pipe';
 
 
 @NgModule({
-  declarations:[SafePipe], // <---
+  declarations:[SafePipe, TipoPlanPipe], // <---
   imports:[CommonModule],
-  exports:[SafePipe] // <---
+  exports:[SafePipe,TipoPlanPipe] // <---
 })
 
 export class PipesModule { }

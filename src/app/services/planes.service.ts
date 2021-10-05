@@ -12,6 +12,11 @@ export class PlanesService {
 
   public planesCard:PlanCard[]=[];
 
+  public length$ = new EventEmitter<any>();
+  public pageOffset$ = new EventEmitter<any>();
+  public pageIndex$ = new EventEmitter<any>();
+
+
   public planesCard$ = new EventEmitter<PlanCard[]>();
   public PlanesCardResponse$ = new EventEmitter<PlanesCardResponse>();
 
@@ -20,14 +25,33 @@ export class PlanesService {
   }
 
   getPlanesCard():PlanCard[]{
+    console.log('[PlanesService] getPlanesCard - start');
      this.http.get<PlanesCardResponse>(`${environment.api_url}/planes`).subscribe(resp=>{
       this.planesCard$.emit(resp.data);
       this.PlanesCardResponse$.emit(resp);
+      this.length$.emit(resp.meta.total);
+      this.pageOffset$.emit(resp.meta.per_page);
+      this.pageIndex$.emit(resp.meta.current_page);
     });
+    console.log('[PlanesService] getPlanesCard - end');
     return this.planesCard;
   }
 
+
+  getPlanesCardByPage(page: any){
+    console.log('[PlanesService] getPlanesCardByPage - start');
+    this.http.get<PlanesCardResponse>(`${environment.api_url}/planes?page=${page}`).subscribe(resp=>{
+      this.planesCard$.emit(resp.data);
+      this.PlanesCardResponse$.emit(resp);
+    });
+    console.log('[PlanesService] getPlanesCardByPage - end');
+  }
+
   getPlanesCardFilter(form:NgForm){
+    console.log('[PlanesService] getPlanesCardFilter - start');
+
+    console.log('form:');
+    console.log(form);
     if(form.value.precioMinimo == null && form.value.precioMaximo == null ){
         this.getPlanesCard();
     }else{
@@ -44,5 +68,6 @@ export class PlanesService {
         this.PlanesCardResponse$.emit(resp);
       });
     }
+    console.log('[PlanesService] getPlanesCardFilter - end');
   }
 }

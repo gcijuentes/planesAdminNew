@@ -1,0 +1,159 @@
+<aside class="l-col-12 l-col-md-4">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <!--<div class="flex flex-items-center mb-2">
+    <svg class="icon icon-high-emphasis icon-medium mr-1"><use href="assets/icons/icons.svg#filter"/></svg>
+    <h3 class="m-0 fw-bold">All Filtros</h3>
+  </div> -->
+
+    <div class="card mb-4">
+      <div class="card__title flex flex-items-center">
+        <svg class="icon icon-success icon-small mr-1">
+          <use href="assets/icons/icons.svg#price" />
+        </svg>
+        <h3 class="m-0 fw-bold">Perfil</h3>
+        <i data-feather="circle"></i>
+      </div>
+
+      <div class="divider mb-2"></div>
+      <div class="l-grid">
+        <div class="l-col-4">
+          <div class="form__group col-xs-1">
+            <input class="form__input" type="number" max="120" name="newEdad" id="newEdad" min="0"
+            placeholder="Edad">
+          </div>
+        </div>
+        <div class="l-col-3">
+          <input class="form-check-input  form-control" type="checkbox" name="isCotizante"
+           value="true" id="isCotizante" checked>
+          <label class="form-check-label" for="isCotizante">
+            Carga
+          </label>
+        </div>
+        <div class="l-col-4">
+          <div class="form__group">
+            <button type="submit" class="button button-success " (click)="addItem()">Agregar</button>
+          </div>
+        </div>
+
+      </div>
+      <table width="100%" id="personList" class="table-striped small">
+        <thead>
+          <tr class="small bg-light">
+            <th width="20%">Edad</th>
+            <th width="50%">Tipo</th>
+            <th width="10%">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of persons; let i = index">
+            <td> {{row.edad}} </td>
+            <td><span class="badge badge-light-success">{{row.tipo}}</span> </td>
+            <td><button type="button" class="btn btn-icon btn-icon rounded-circle btn-flat-danger"
+              id="line-0" (click)="deleteRow(i)">x</button></td>
+         </tr>
+         <!-- <tr id="fila-{{person.id}">
+            <td>44</td>
+            <td><span class="badge badge-light-success">Cotizante</span></td>
+            <td><button type="button" class="btn btn-icon btn-icon rounded-circle btn-flat-danger"
+                id="line-0" >x</button></td>
+          </tr>-->
+
+
+        </tbody>
+      </table>
+      <!-- <div class="text-center">
+        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar precio</button>
+      </div>-->
+    </div>
+
+    <div class="card mb-4">
+      <div class="card__title flex flex-items-center">
+        <svg class="icon icon-success icon-small mr-1">
+          <use href="assets/icons/icons.svg#price" />
+        </svg>
+        <h3 class="m-0 fw-bold">Precio</h3>
+      </div>
+      <div class="divider mb-2"></div>
+      <div class="l-grid">
+        <div class="l-col-6">
+          <div class="form__group">
+            <input class="form__input form-control" type="number"  min="0" placeholder="Precio mínimo">
+          </div>
+        </div>
+
+        <div class="l-col-6">
+          <div class="form__group">
+            <input class="form__input form-control" type="number" formControlName="precioMaximo" min="0" placeholder="Precio máximo">
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
+          precio</button>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card__title flex flex-items-center">
+        <svg class="icon icon-success icon-small mr-1">
+          <use href="assets/icons/icons.svg#price" />
+        </svg>
+        <h3 class="m-0 fw-bold">Tipo de Plan</h3>
+      </div>
+      <div class="divider mb-2"></div>
+      <div class="">
+        <div class="form-check">
+          <input class="form-check-input  form-control" type="checkbox" formControlName="checkPreferente">
+          <label class="form-check-label" for="defaultCheck1">
+            Preferentes
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input  form-control" type="checkbox" formControlName="checkLibreEleccion" >
+          <label class="form-check-label" for="defaultCheck2">
+            Libre Elecci&oacute;n
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input  form-control" type="checkbox" formControlName="checkCerrado" >
+          <label class="form-check-label" for="defaultCheck3">
+            Cerrados
+          </label>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
+          precio</button>
+      </div>
+    </div>
+
+
+    <div class="card mb-4">
+      <div class="card__title flex flex-items-center">
+        <svg class="icon icon-success icon-small mr-1">
+          <use href="assets/icons/icons.svg#price" />
+        </svg>
+        <h3 class="m-0 fw-bold">Isapres</h3>
+      </div>
+      <div class="divider mb-2"></div>
+      <div class="" >
+        <div formArrayName="isapres" class="form-check" *ngFor="let isapre of items.controls">
+          <input class="form-check-input  form-control" type="checkbox" formControlName="name">
+          <label class="form-check-label" for="{{isapre.value.name}}">
+            {{isapre.value.name}}
+          </label>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
+          precio</button>
+      </div>
+    </div>
+
+
+
+   <!--  {{formFiltros.value | json}} -->
+
+  </form>
+
+</aside>

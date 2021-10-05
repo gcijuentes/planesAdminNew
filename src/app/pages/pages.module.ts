@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from '../components/components.module';
 import { DetalleComponent } from './detalle/detalle.component';
 
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
    declarations: [
@@ -36,7 +38,8 @@ import { DetalleComponent } from './detalle/detalle.component';
     CommonModule,
     SharedModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule
   ]
 })
 export class PagesModule { }
