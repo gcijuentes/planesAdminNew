@@ -2,142 +2,154 @@ import { Component, OnInit } from '@angular/core';
 import { IsapresService } from '../../services/isapres.service';
 import { Isapre } from '../../interfaces/isapre.interface';
 import { PlanesService } from '../../services/planes.service';
-import { FormGroup ,FormControl, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-all-filter',
   templateUrl: './all-filter.component.html',
-  styleUrls: ['./all-filter.component.css']
+  styleUrls: ['./all-filter.component.css'],
 })
 export class AllFilterComponent implements OnInit {
-
-  public isapres:Isapre[]=[];
+  public isapres: Isapre[] = [];
 
   formulario: FormGroup;
   items: FormArray;
+  perfiles: FormArray;
 
   persons = [];
 
-  newEdad:number=0;
-  isCotizante:boolean=false;
+  newEdad: number = 0;
+  isCarga: boolean = false;
 
-  constructor(private planesService:PlanesService,private isapreService:IsapresService,
-    private fb: FormBuilder) {
-   }
+  constructor(
+    private planesService: PlanesService,
+    private isapreService: IsapresService,
+    private fb: FormBuilder
+  ) {}
 
-
-   crearFormulario() {
+  crearFormulario() {
     this.formulario = this.fb.group({
-      precioMinino: new FormControl(),
+      precioMinimo: new FormControl(),
       precioMaximo: new FormControl(),
       checkPreferente: new FormControl(),
       checkLibreEleccion: new FormControl(),
       checkCerrado: new FormControl(),
-      //perfiles: this.fb.array(group),
+      newEdad: new FormControl(),
+      isCarga: new FormControl(),
+      perfiles: this.fb.array([]),
       //checkBanmedica: new FormControl(),
       ////checkColmena: new FormControl(),
       ////checkConsalud: new FormControl(),
       //checkCruzBlanca: new FormControl(),
       //checkNuevaVida: new FormControl(),
       //checkVidatres: new FormControl(),
-      //isapres: this.fb.array([])
-      isapres: this.fb.array([])
-  });
+      //isapres: this.fb.array([]),
+      isapres: this.fb.array([]),
+      //isapres: new FormArray([])
+      //prueba: this.formulario2
+    });
   }
 
-
-
   ngOnInit(): void {
-    let group={};
+    console.log('ng Oninit');
+    let group = {};
     this.crearFormulario();
     this.isapreService.getPlanesCard();
-    console.log('antes');
-    console.log(this.formulario);
-    this.isapreService.isapres$.subscribe(resp=>{
-      this.isapres=resp;
-      this.isapres.forEach(isapre=>{
-          console.log('nombre:'+isapre.nombre);
-          //this.addIsapre(isapre.nombre);
-          let nameControl = isapre.nombre.replace(/\s/g, "");
-          //this.formulario.addControl(('check' + (nameControl)), new FormGroup({}));
 
-          this.items = this.formulario.get('isapres') as FormArray;
-          this.items.push( new FormGroup({}));
+    console.log(this.formulario);
+    this.isapreService.isapres$.subscribe((resp) => {
+      this.isapres = resp;
+      //this.addCheckboxesToForm();
+      this.isapres.forEach((isapre) => {
+        // console.log('nombre:'+isapre.nombre);
+        this.addIsapre(isapre.id,isapre.nombre);
       });
     });
 
-    console.log('despues');
+    //console.log('despues');
     console.log(this.formulario);
-
   }
 
-  filtrar(form ):void{
-    this.planesService.getPlanesCardFilter(form);
+  filtrar(): void {
+    //console.log("filtrar");
+    this.planesService.getPlanesCardFilter(this.formulario);
   }
 
-  onSubmit(){
-   console.log(this.formulario.value);
-   // this.planesService.getPlanesCardFilter(formValues);
+  onSubmit() {
+    //console.log("on submit");
+    this.planesService.getPlanesCardFilter(this.formulario);
+  }
+
+  get ordersFormArray() {
+    return this.formulario.controls.isapres as FormArray;
   }
 
   addItem() {
-    console.log('new edad:');
-    console.log(this.newEdad);
+   //console.log('new edad:');
+    //console.log(this.formulario.value.newEdad);
     console.log('isCotizante:');
-    console.log(this.isCotizante);
+    console.log(this.formulario.value.isCarga);
     let cotizanteString = 'carga';
 
-    if(this.newEdad > 120){
+    let newEdad = this.formulario.value.newEdad;
+    let isCarga =  (this.formulario.value.isCarga==null)? false: this.formulario.value.isCarga;
+    //console.log('isCarga:'+isCarga)
+    if (newEdad > 120) {
       return false;
     }
 
-    let countCotizante = this.persons.reduce(function(n, person) {
-      //console.log('n:'+n);
-      //console.log('person:'+person);
-      return n + (person.tipo === 'cotizante' );
-      }, 0);
+    let countCotizante = this.persons.reduce(function (n, person) {
+      return n + (person.tipo === 'cotizante');
+    }, 0);
 
-
-    console.log('countCotizante');
-    console.log(countCotizante);
-
-    if(!this.isCotizante){
-      cotizanteString = 'cotizante'
-      if(countCotizante>1){
+    if (!isCarga) {
+      cotizanteString = 'cotizante';
+      if (countCotizante > 1) {
         return false;
       }
     }
+    ///this.formulario.value.newEdad =33;
+    this.formulario.controls['newEdad'].setValue('');
+    this.addPerfil(1,newEdad,isCarga);
+    this.filtrar();
 
-    let newPerfil = this.fb.group(
-      {
-        perfil: new FormControl('')
-      }
-    );
-
-    //this.perfiles.push(newPerfil);
-    this.filtrar(this.formulario);
-    this.persons.push({edad:this.newEdad, tipo: cotizanteString});
+    this.persons.push({ edad: newEdad, tipo: cotizanteString });
   }
 
-  deleteRow(index){
-    console.log('index');
-    console.log(index);
-    this.persons.splice(index,1);
+  deleteRow(index) {
+    this.perfiles = this.formulario.get('perfiles') as FormArray;
+    this.perfiles.removeAt(index);
+    this.persons.splice(index, 1);
   }
 
-  addIsapre(name:string): void {
+  addIsapre(id:number , name: string): void {
     this.items = this.formulario.get('isapres') as FormArray;
-    this.items.push(this.createFormGroup(name));
+    this.items.push(this.createFormGroup(id,name));
   }
 
-  createFormGroup(name:string): FormGroup {
+  createFormGroup(id:number, name: string): FormGroup {
     return this.fb.group({
-      name: ''
+      name: name,
+      id: id,
+      selected: false,
     });
   }
 
-  isapresFormArray(): FormArray {
-    return this.formulario.get('isapres') as FormArray;
+  addPerfil(id:number,edad: string,isCarga:boolean): void {
+    this.perfiles = this.formulario.get('perfiles') as FormArray;
+    this.perfiles.push(this.createPerfilFormGroup(id,edad,isCarga));
+  }
+
+  createPerfilFormGroup(id:number,edad: string,isCarga:boolean): FormGroup {
+    return this.fb.group({
+      id: id,
+      edad: edad,
+      isCarga: isCarga
+    });
+  }
+
+  get isapresFormArray(): FormArray {
+    return this.formulario.controls.isapres as FormArray;
   }
 
 }

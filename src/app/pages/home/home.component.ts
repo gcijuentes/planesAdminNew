@@ -22,13 +22,13 @@ export class HomeComponent implements OnInit {
 
 
       this.planesService.PlanesCardResponse$.subscribe(resp=>{
-        console.log('home component');
+       // console.log('home component');
         this.totalItems = resp.meta.total;
         this.itemsPerPage = resp.meta.per_page;
         this.currentPage = resp.meta.current_page;
         this.planesCard = resp.data;
-        console.log(this.planesCard);
-        console.log('home component complete');
+        //console.log(this.planesCard);
+       // console.log('home component complete');
       });
 
 

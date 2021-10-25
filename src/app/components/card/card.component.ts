@@ -25,19 +25,19 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('CardComponent');
-    console.log(this.planesCard);
+    //console.log('CardComponent');
+   // console.log(this.planesCard);
 
   }
 
   pageChanged(event){
-    console.log('getPage -> ');
+   // console.log('getPage -> ');
     this.config.currentPage = event;
   }
 
   getPage(page) {
-    console.log('getPage -> '+page);
-    console.log(page);
+    //console.log('getPage -> '+page);
+   // console.log(page);
     this.planesService.getPlanesCardByPage(page);
 
   }

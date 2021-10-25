@@ -18,20 +18,20 @@
       <div class="l-grid">
         <div class="l-col-4">
           <div class="form__group col-xs-1">
-            <input class="form__input" type="number" max="120" name="newEdad" id="newEdad" min="0"
-            placeholder="Edad">
+            <input class="form__input form-control" type="number" max="120" name="newEdad" id="newEdad" min="0"
+            placeholder="Edad" formControlName="newEdad">
           </div>
         </div>
         <div class="l-col-3">
-          <input class="form-check-input  form-control" type="checkbox" name="isCotizante"
-           value="true" id="isCotizante" checked>
-          <label class="form-check-label" for="isCotizante">
+          <input class="form-check-input form-control" type="checkbox" name="isCarga"
+           value="true" id="isCarga" formControlName="isCarga">
+          <label class="form-check-label" for="isCarga">
             Carga
           </label>
         </div>
         <div class="l-col-4">
           <div class="form__group">
-            <button type="submit" class="button button-success " (click)="addItem()">Agregar</button>
+            <button type="button" class="button button-success" (click)="addItem()">Agregar</button>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
       <div class="l-grid">
         <div class="l-col-6">
           <div class="form__group">
-            <input class="form__input form-control" type="number"  min="0" placeholder="Precio mínimo">
+            <input class="form__input form-control" type="number" formControlName="precioMinimo" min="0" placeholder="Precio mínimo">
           </div>
         </div>
 
@@ -103,20 +103,20 @@
       <div class="divider mb-2"></div>
       <div class="">
         <div class="form-check">
-          <input class="form-check-input  form-control" type="checkbox" formControlName="checkPreferente">
-          <label class="form-check-label" for="defaultCheck1">
+          <input class="form-check-input  form-control" type="checkbox" id="checkPreferente" formControlName="checkPreferente" (change)="filtrar()">
+          <label class="form-check-label" for="checkPreferente">
             Preferentes
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input  form-control" type="checkbox" formControlName="checkLibreEleccion" >
-          <label class="form-check-label" for="defaultCheck2">
+          <input class="form-check-input  form-control" type="checkbox" id="checkLibreEleccion" formControlName="checkLibreEleccion" (change)="filtrar()">
+          <label class="form-check-label" for="checkLibreEleccion">
             Libre Elecci&oacute;n
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input  form-control" type="checkbox" formControlName="checkCerrado" >
-          <label class="form-check-label" for="defaultCheck3">
+          <input class="form-check-input  form-control" type="checkbox" id="checkCerrado" formControlName="checkCerrado" (change)="filtrar()">
+          <label class="form-check-label" for="checkCerrado">
             Cerrados
           </label>
         </div>
@@ -136,13 +136,17 @@
         <h3 class="m-0 fw-bold">Isapres</h3>
       </div>
       <div class="divider mb-2"></div>
-      <div class="" >
-        <div formArrayName="isapres" class="form-check" *ngFor="let isapre of items.controls">
-          <input class="form-check-input  form-control" type="checkbox" formControlName="name">
+      <div class="" formArrayName="isapres">
+
+        <div class="form-check" *ngFor="let isapre of isapresFormArray.controls;let i = index" [formGroupName]="i">
+
+          <input class="form-check-input form-control" type="checkbox" name="{{isapre.value.name}}"
+           value="true" id="{{isapre.value.name}}" formControlName="selected">
           <label class="form-check-label" for="{{isapre.value.name}}">
             {{isapre.value.name}}
           </label>
         </div>
+
       </div>
       <div class="text-center">
         <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
