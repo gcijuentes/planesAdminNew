@@ -91,10 +91,11 @@ export class AllFilterComponent implements OnInit {
     console.log(this.formulario.value.isCarga);
     let cotizanteString = 'carga';
 
+
     let newEdad = this.formulario.value.newEdad;
     let isCarga =  (this.formulario.value.isCarga==null)? false: this.formulario.value.isCarga;
     //console.log('isCarga:'+isCarga)
-    if (newEdad > 120) {
+    if (newEdad > 120 || newEdad == null) {
       return false;
     }
 

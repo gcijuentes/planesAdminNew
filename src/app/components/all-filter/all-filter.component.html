@@ -88,7 +88,7 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
+        <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar filtro
           precio</button>
       </div>
     </div>
@@ -121,10 +121,10 @@
           </label>
         </div>
       </div>
-      <div class="text-center">
+      <!--<div class="text-center">
         <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
           precio</button>
-      </div>
+      </div> -->
     </div>
 
 
@@ -141,17 +141,17 @@
         <div class="form-check" *ngFor="let isapre of isapresFormArray.controls;let i = index" [formGroupName]="i">
 
           <input class="form-check-input form-control" type="checkbox" name="{{isapre.value.name}}"
-           value="true" id="{{isapre.value.name}}" formControlName="selected">
+           value="true" id="{{isapre.value.name}}" formControlName="selected" (change)="filtrar()">
           <label class="form-check-label" for="{{isapre.value.name}}">
             {{isapre.value.name}}
           </label>
         </div>
 
       </div>
-      <div class="text-center">
+      <!--<div class="text-center">
         <button type="submit" class="button button-success d-block wt-100 sm-wt-50 md-wt-100 mt-2">Aplicar
           precio</button>
-      </div>
+      </div> -->
     </div>
 
 
